@@ -8,7 +8,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "14.x" # 使用Node.js 14
+          node-version: "16.x" # 使用Node.js 14
       - name: Install dependencies
         working-directory: ./worksheet2/my-react-app # 前端项目路径
         run: npm install
