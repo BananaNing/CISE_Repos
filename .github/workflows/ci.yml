@@ -1,9 +1,9 @@
 name: Run Tests # 工作流名称（保持不变）
 on:
   push:
-    branches: [main] # 仅当代码推送到 main 分支时触发
+    branches: [main] # 代码推送到 main 分支时触发
   pull_request:
-    branches: [main] # 仅当 PR 的目标分支是 main 时触发（可选，用于合并前验证）
+    branches: [main] # PR 目标分支是 main 时触发
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -13,7 +13,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "12.x" # 已按要求从 12.x 改为 14.x
+          node-version: "12.x"
       - name: Install dependencies
         working-directory: ./worksheet2/my-react-app # 你的项目路径
         run: npm install
