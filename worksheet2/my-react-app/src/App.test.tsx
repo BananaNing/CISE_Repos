@@ -27,6 +27,6 @@ test('increments count when button is clicked', () => {
 // 分组测试
 describe('Addition', () => {
   it('knows that 2 and 2 make 4', () => {
-    expect(2 + 2).toBe(4); // 断言2+2的结果应为4
+    expect(2 + 2).toBe(5); // 断言2+2的结果应为4,此时将它改成5，看看是否会显示失败
   });
 });
