@@ -1,17 +1,22 @@
-name: Run Tests
-on: [push, pull_request] # 触发条件：推送代码或创建PR时
+name: Run Tests # 工作流名称（保持不变）
+on:
+  push:
+    branches: [main] # 仅当代码推送到 main 分支时触发
+  pull_request:
+    branches: [main] # 仅当 PR 的目标分支是 main 时触发（可选，用于合并前验证）
 jobs:
   test:
-    runs-on: ubuntu-latest # 运行环境
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 # 拉取代码
+      # 以下步骤保持不变（拉取代码、安装依赖、运行测试等）
+      - uses: actions/checkout@v4
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "16.x" # 使用Node.js 14
+          node-version: "12.x" # 已按要求从 12.x 改为 14.x
       - name: Install dependencies
-        working-directory: ./worksheet2/my-react-app # 前端项目路径
+        working-directory: ./worksheet2/my-react-app # 你的项目路径
         run: npm install
       - name: Run tests
         working-directory: ./worksheet2/my-react-app
-        run: npm test -- --watchAll=false # 非监视模式运行测试
+        run: npm test -- --watchAll=false
