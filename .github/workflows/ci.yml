@@ -1,22 +1,33 @@
-name: Run Tests # 工作流名称（保持不变）
+name: CI_action
+
 on:
   push:
-    branches: [main] # 代码推送到 main 分支时触发
+    branches: [main]
   pull_request:
-    branches: [main] # PR 目标分支是 main 时触发
+    branches: [main]
+
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
     steps:
-      # 以下步骤保持不变（拉取代码、安装依赖、运行测试等）
-      - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Checkout respository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          node-version: "12.x"
+          node-version: ${{ matrix.node-version }}
+
       - name: Install dependencies
-        working-directory: ./worksheet2/my-react-app # 你的项目路径
         run: npm install
-      - name: Run tests
-        working-directory: ./worksheet2/my-react-app
-        run: npm test -- --watchAll=false
+
+      - name: Run the tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
